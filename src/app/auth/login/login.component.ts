@@ -21,8 +21,8 @@ login()
 constructor(private fb:FormBuilder) 
 {
   this.loginForm=fb.group({
-    email:fb.control(['', Validators.required]) ,
-    password: fb.control(['', Validators.required])
+    email: fb.control('', [Validators.required]),
+    password: fb.control('', [Validators.required])
   });
  
 }
