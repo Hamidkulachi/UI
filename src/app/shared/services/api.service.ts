@@ -9,6 +9,10 @@ import { User, UserType } from '../../models/models';
   providedIn: 'root'
 })
 export class ApiService {
+  logOut() {
+    localStorage.removeItem('access_token');
+    this.userStatus.next('loggedOff');
+  }
  baseUrl:string='https://localhost:44350/api/Library/';
  userStatus: Subject<string> = new Subject();
  constructor(private http: HttpClient, private jwt: JwtHelperService){}
