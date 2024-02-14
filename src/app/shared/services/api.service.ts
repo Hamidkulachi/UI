@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
  baseUrl:string='https://localhost:44350/api/Library/';
-
+ userStatus: Subject<string> = new Subject();
  constructor(private http: HttpClient){}
 
  register(user: any) 
@@ -16,4 +17,15 @@ export class ApiService {
      responseType: 'text',
    });
  }
+
+ login(info: any) {
+  let params = new HttpParams()
+    .append('email', info.email)
+    .append('password', info.password);
+  return this.http.get(this.baseUrl + 'Login', {
+    params: params,
+    responseType: 'text',
+  });
+}
+
 }

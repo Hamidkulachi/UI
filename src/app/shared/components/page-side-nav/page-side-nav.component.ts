@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 export interface NavigationItem {
   value: string;
@@ -13,11 +15,20 @@ export interface NavigationItem {
 export class PageSideNavComponent {
   panelName: string = 'Student';
   navItems: NavigationItem[] = [];
-  constructor() {
+  constructor(private apiService:ApiService,private router:Router)
+   {
     this.navItems = [
-      { value: 'Home', link: '/home' },
-      { value: 'About', link: '/about' },
-      { value: 'Contact', link: '/contact' }
+      { value: 'View Books', link: '/view-books' },
+      { value: 'My Orders', link: '/my-orders' }
     ];
+    apiService.userStatus.subscribe({
+      next:(status)=>{
+        if(status=='loggedin'){
+          router.navigateByUrl('/home');
+        } else{
+
+        }
+      },
+    });
   }
 }
