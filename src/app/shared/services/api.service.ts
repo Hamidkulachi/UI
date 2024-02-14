@@ -11,6 +11,7 @@ export class ApiService {
 
  register(user: any) 
  {
+  debugger
    return this.http.post(this.baseUrl + 'Register', user, {
      responseType: 'text',
    });

@@ -28,6 +28,7 @@ export class RegisterComponent {
   }
 
   register() {
+    debugger
     let user = {
       firstName: this.registerForm.get('firstName')?.value,
       lastName: this.registerForm.get('lastName')?.value,
