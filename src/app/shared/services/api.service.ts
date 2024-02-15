@@ -81,7 +81,26 @@ getOrdersOfUser(userId: number) {
   return this.http
     .get<any>(this.baseUrl + 'GetOrdersOfUser', {
       params: params,
-    });
+    })
+    .pipe(
+      map((orders) => {
+        let newOrders = orders.map((order: any) => {
+          let newOrder: Order = {
+            id: order.id,
+            userId: order.userId,
+            userName: order.user.firstName + ' ' + order.user.lastName,
+            bookId: order.bookId,
+            bookTitle: order.book.title,
+            orderDate: order.orderDate,
+            returned: order.returned,
+            returnDate: order.returnDate,
+            finePaid: order.finePaid,
+          };
+          return newOrder;
+        });
+        return newOrders;
+      })
+    );
 }
 
 }
