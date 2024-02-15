@@ -1,14 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Book, User, UserType } from '../../models/models';
+import { Book, Order, User, UserType } from '../../models/models';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+ 
   logOut() {
     localStorage.removeItem('access_token');
     this.userStatus.next('loggedOff');
@@ -74,4 +75,13 @@ orderBook(book: Book) {
     responseType: 'text',
   });
 }
+
+getOrdersOfUser(userId: number) {
+  let params = new HttpParams().append('userId', userId);
+  return this.http
+    .get<any>(this.baseUrl + 'GetOrdersOfUser', {
+      params: params,
+    });
+}
+
 }
