@@ -40,7 +40,31 @@ export class BookStoreComponent {
   constructor(private apiService: ApiService, private snackBar: MatSnackBar) {
     apiService.getBooks().subscribe({
       next: (res: Book[]) => {
-       console.log(res);
+        this.books=[];
+        res.forEach((b)=> this.books.push(b));
+
+        this.booksToDisplay=[];
+        for(let book of this.books){
+          let categoryExists=false;
+          let categoryBook:BooksByCategory|null;
+          for(let bookToDisplay of this.booksToDisplay){
+            if(bookToDisplay.bookCategoryId==book.bookCategoryId){
+              categoryExists=true;
+              categoryBook=bookToDisplay;
+            }
+          } 
+          if(categoryExists){
+            categoryBook!.books.push(book);
+          }else{
+            this.booksToDisplay.push({
+              bookCategoryId: book.bookCategoryId,
+              category: book.bookCategory.category,
+              subCategory: book.bookCategory.subCategory,
+              books: [book],
+            });
+          }
+
+        }
       },
     });
   }
