@@ -9,6 +9,7 @@ import { ApiService } from '../../shared/services/api.service';
   styleUrl: './user-orders.component.scss',
 })
 export class UserOrdersComponent {
+
   columnsForPendingReturns: string[] = [
     'orderId',
     'bookId',
@@ -36,5 +37,8 @@ export class UserOrdersComponent {
       },
     });
   }
+  getFineToPay(order: Order) {
+   return this.apiService.getFine(order)
+    }
 
 }
