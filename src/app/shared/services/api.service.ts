@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User, UserType } from '../../models/models';
+import { Book, User, UserType } from '../../models/models';
 
 
 @Injectable({
@@ -60,5 +60,8 @@ getUserInfo(): User | null {
   return user;
 }
 
+getBooks() {
+  return this.http.get<Book[]>(this.baseUrl + 'GetBooks');
+}
 
 }

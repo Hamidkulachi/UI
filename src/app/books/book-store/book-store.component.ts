@@ -37,5 +37,16 @@ export class BookStoreComponent {
     },
   ];
 
-  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {}
+  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {
+    apiService.getBooks().subscribe({
+      next: (res: Book[]) => {
+       console.log(res);
+      },
+    });
+  }
+  getBookCount() {
+    let count = 0;
+    this.booksToDisplay.forEach((b) => (count += b.books.length));
+    return count;
+  }
 }
