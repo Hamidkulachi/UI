@@ -1,6 +1,6 @@
 <mat-form-field color="accent" appearance="outline">
     <mat-label>Search Books</mat-label>
-    <input matInput>
+    <input matInput (input)="searchBooks(searchField.value)" #searchField>
     <button mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>
     </button>
@@ -8,7 +8,7 @@
 
 <mat-card>
     <mat-card-content>
-        Showing Results for 10 Books.
+        Showing Results for {{ getBookCount() }} Books.
     </mat-card-content>
 </mat-card>
 
