@@ -2,13 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, map } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Book, Order, User, UserType } from '../../models/models';
+import { Book, BookCategory, Order, User, UserType } from '../../models/models';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+ 
+
+ 
  
   logOut() {
     localStorage.removeItem('access_token');
@@ -112,5 +115,24 @@ getFine(order: Order) {
     return days * 50;
   }
   return 0;
+}
+getCategories() {
+  return this.http.get<BookCategory[]>(this.baseUrl + 'GetCategories');
+}
+addNewCategory(category: BookCategory) {
+  return this.http.post(this.baseUrl + 'AddCategory', category, {
+    responseType: 'text',
+  });
+}
+addBook(book: Book) {
+  return this.http.post(this.baseUrl + 'AddBook', book, {
+    responseType: 'text',
+  });
+}
+deleteBook(id: number) {
+  return this.http.delete(this.baseUrl + 'DeleteBook', {
+    params: new HttpParams().append('id', id),
+    responseType: 'text',
+  });
 }
 }
