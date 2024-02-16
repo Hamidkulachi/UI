@@ -4,6 +4,7 @@ import { ViewBooksComponent } from './view-books/view-books.component';
 import { BookStoreComponent } from './book-store/book-store.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { ReturnBookComponent } from './return-book/return-book.component';
 
 
 
@@ -11,7 +12,8 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
   declarations: [
     ViewBooksComponent,
     BookStoreComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    ReturnBookComponent
   ],
   imports: [
     CommonModule,

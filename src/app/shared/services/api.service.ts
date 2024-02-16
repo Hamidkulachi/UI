@@ -10,8 +10,6 @@ import { Book, BookCategory, Order, User, UserType } from '../../models/models';
 })
 export class ApiService {
  
-
- 
  
   logOut() {
     localStorage.removeItem('access_token');
@@ -135,4 +133,15 @@ deleteBook(id: number) {
     responseType: 'text',
   });
 }
+
+returnBook(userId: string, bookId: string, fine: number) {
+  return this.http.get(this.baseUrl + 'ReturnBook', {
+    params: new HttpParams()
+      .append('userId', userId)
+      .append('bookId', bookId)
+      .append('fine', fine),
+    responseType: 'text',
+  });
+}
+
 }
