@@ -9,7 +9,16 @@ import { Book, BookCategory, Order, User, UserType } from '../../models/models';
   providedIn: 'root'
 })
 export class ApiService {
- 
+  approveRequest(userId: number) {
+    return this.http.get(this.baseUrl + 'ApproveRequest', {
+      params: new HttpParams().append('userId', userId),
+      responseType: 'text',
+    });
+  }
+  getUsers() {
+    return this.http.get<User[]>(this.baseUrl + 'GetUsers');
+  }
+
  
   logOut() {
     localStorage.removeItem('access_token');
