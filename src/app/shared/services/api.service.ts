@@ -9,6 +9,38 @@ import { Book, BookCategory, Order, User, UserType } from '../../models/models';
   providedIn: 'root'
 })
 export class ApiService {
+  blockUsers() {
+    return this.http.get(this.baseUrl + 'BlockFineOverdueUsers', {
+      responseType: 'text',
+    });
+  }
+  sendEmail() {
+    return this.http.get(this.baseUrl + 'SendEmailForPendingReturns', {
+      responseType: 'text',
+    });
+  }
+  getOrders() {
+    return this.http.get<any>(this.baseUrl + 'GetOrders').pipe(
+      map((orders) => {
+        let newOrders = orders.map((order: any) => {
+          let newOrder: Order = {
+            id: order.id,
+            userId: order.userId,
+            userName: order.user.firstName + ' ' + order.user.lastName,
+            bookId: order.bookId,
+            bookTitle: order.book.title,
+            orderDate: order.orderDate,
+            returned: order.returned,
+            returnDate: order.returnDate,
+            finePaid: order.finePaid,
+          };
+          return newOrder;
+        });
+        return newOrders;
+      })
+    );
+  }
+
   approveRequest(userId: number) {
     return this.http.get(this.baseUrl + 'ApproveRequest', {
       params: new HttpParams().append('userId', userId),
