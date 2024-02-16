@@ -9,6 +9,12 @@ import { Book, BookCategory, Order, User, UserType } from '../../models/models';
   providedIn: 'root'
 })
 export class ApiService {
+  unblock(userId: number) {
+    return this.http.get(this.baseUrl + "Unblock", {
+      params: new HttpParams().append("userId", userId),
+      responseType: "text",
+    });
+  }
   blockUsers() {
     return this.http.get(this.baseUrl + 'BlockFineOverdueUsers', {
       responseType: 'text',
